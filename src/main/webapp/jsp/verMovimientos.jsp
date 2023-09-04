@@ -84,6 +84,14 @@
                 <td>${movimiento.monto}</td>
                 <td>${movimiento.descripcion}</td>
                 
+                <td>
+                    <form action="${pageContext.request.contextPath}/GestionCuentaController" method="POST">
+                        <input type="hidden" name="ruta" value="eliminarMovimiento" />
+                        <input type="hidden" name="movimientoId" value="${movimiento.id}" />
+                        <button type="submit" class="btn btn-danger">Eliminar</button>
+                    </form>
+                </td>
+                
             </tr>
         </c:forEach>
             

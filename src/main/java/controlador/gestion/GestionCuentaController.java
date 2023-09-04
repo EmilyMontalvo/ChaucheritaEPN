@@ -17,6 +17,7 @@ import modelo.dao.CuentaDAO;
 import modelo.dao.DAOFactory;
 import modelo.dao.EgresoDAO;
 import modelo.dao.IngresoDAO;
+import modelo.dao.MovimientoDAO;
 import modelo.dao.TransferenciaDAO;
 import modelo.entidades.Cuenta;
 import modelo.entidades.Egreso;
@@ -91,11 +92,27 @@ public class GestionCuentaController extends HttpServlet {
 		case "ajustarSaldo":
 			this.ajustarSaldo(request, response);
 			break;
+		case "eliminarMovimiento":
+			this.eliminarMovimiento(request, response);
+			break;
 		case "error":
 			break;
 		default:
 			break;
 		}
+	}
+	
+	private void eliminarMovimiento(HttpServletRequest request, HttpServletResponse response) throws IOException {
+	        // Obtener el ID del movimiento a eliminar desde el formulario
+	        int movimientoId = Integer.parseInt(request.getParameter("movimientoId"));
+	        
+	        // Lógica para eliminar el movimiento
+	        MovimientoDAO movimientoDAO = modelo.dao.DAOFactory.getFactory().getMovimientoDAO();
+	        movimientoDAO.deleteById(movimientoId); // Ajusta esto a tu implementación
+	        
+	        // Redirigir a la página de movimientos actualizada
+	        response.sendRedirect("GestionCuentaController?ruta=verMovimientosPantalla");
+	    
 	}
 	
 	
@@ -410,8 +427,10 @@ public class GestionCuentaController extends HttpServlet {
 	        response.sendRedirect("jsp/error.jsp"); 
 	    }
     }
+	
+	
 
 		
-	}
+}
 
 
